@@ -1,0 +1,5 @@
+# Allow only admin:administrator
+admin:x:administrator
+
+# Deny root completely
+root:x:!
