@@ -1,0 +1,16 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+
+# Log files (Do not upload live logs to GitHub!)
+docker/clamav/log/*.log
+docker/suricata/log/*.log
+docker/suricata/log/*.json
+docker/cowrie/log/*
+
+# Ignore OS generated files
+.DS_Store
