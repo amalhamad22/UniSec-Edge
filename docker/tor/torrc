@@ -1,0 +1,16 @@
+# UniSec-Edge Tor Gateway Configuration
+# SOCKS5 proxy for applications
+SocksPort 0.0.0.0:9050
+
+# Transparent proxy for MAC-based routing via iptables
+TransPort 0.0.0.0:9040
+
+# DNS through Tor (prevents DNS leaks)
+DNSPort 0.0.0.0:5353
+
+# Privacy settings
+SafeLogging 1
+ClientOnly 1
+
+# Isolate streams per destination
+SocksPort 9050 IsolateDestAddr IsolateDestPort
