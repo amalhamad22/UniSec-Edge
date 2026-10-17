@@ -1,0 +1,31 @@
+services:
+  suricata:
+    image: jasonish/suricata:latest
+    container_name: unisec-ids
+    restart: unless-stopped
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./suricata/log:/var/log/suricata
+      - ./suricata/etc:/etc/suricata
+    command: -c /etc/suricata/suricata.yaml --af-packet -i wlan0
+
+  tor:
+    image: peterdavehello/tor-socks-proxy:latest
+    container_name: unisec-tor
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - ./tor/torrc:/etc/tor/torrc:ro
+      - ./tor/data:/var/lib/tor
+
+  clamav:
+      image: alpine:latest
+      container_name: unisec-usb-sanitizer
+      command: sh -c "apk add --no-cache clamav clamav-libunrar && freshclam && tail -f /dev/null"
+      restart: unless-stopped
+      volumes:
+        - ./clamav/log:/var/log/clamav
+        - /media/pi:/mnt/usb:rw
